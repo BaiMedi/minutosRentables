@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Tiempo Rentable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1, h2 {
+            color: #00344B;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 5px;
+            color: #388e3c;
+            font-weight: bold;
+        }
+        .cta-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cta-container p {
+            color: #00344B;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .cta-container a {
+            display: inline-block;
+            background-color: #00DC42;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .cta-container a:hover {
+            background-color: #00c03a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Tiempo Rentable</h1>
+        <p>Descubre cómo optimizar tu tiempo calculando el valor real de cada hora de trabajo.</p>
+
+        <form id="time-calculator-form">
+            <label for="income">Ingresos mensuales proyectados (€):</label>
+            <input type="number" id="income" placeholder="Ejemplo: 3000">
+
+            <label for="hours">Horas trabajadas al mes:</label>
+            <input type="number" id="hours" placeholder="Ejemplo: 160">
+
+            <label for="low-value">Porcentaje de tiempo en tareas de bajo impacto (%):</label>
+            <input type="number" id="low-value" placeholder="Ejemplo: 30">
+
+            <button type="button" onclick="calculateValue()">Calcular Valor del Tiempo</button>
+        </form>
+
+        <div id="result" class="result" style="display: none;"></div>
+
+        <div class="cta-container">
+            <p>crear un Ingreso Extra Online sin perder tiempo</p>
+            <a href="https://klicana.work/p6Aik4" target="_blank">SÍ, UNIRME AL DESAFÍO!</a>
+        </div>
+    </div>
+
+    <script>
+        function calculateValue() {
+            const income = parseFloat(document.getElementById("income").value);
+            const hours = parseInt(document.getElementById("hours").value, 10);
+            const lowValue = parseFloat(document.getElementById("low-value").value) / 100;
+
+            if (isNaN(income) || isNaN(hours) || isNaN(lowValue) || hours <= 0 || income <= 0 || lowValue < 0) {
+                document.getElementById("result").style.display = "block";
+                document.getElementById("result").textContent = "Por favor, introduce valores válidos.";
+                return;
+            }
+
+            const valuePerHour = income / hours;
+            const lowImpactLoss = valuePerHour * hours * lowValue;
+
+            document.getElementById("result").style.display = "block";
+            document.getElementById("result").innerHTML = `
+                <strong>Resultados:</strong><br>
+                - Valor por hora: €${valuePerHour.toFixed(2)}<br>
+                - Tiempo desperdiciado en tareas de bajo impacto: €${lowImpactLoss.toFixed(2)}<br>
+                <strong>Recomendación:</strong> Identifica tareas de bajo impacto para delegarlas o automatizarlas.
+            `;
+        }
+    </script>
+</body>
+</html>
